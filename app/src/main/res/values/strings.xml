@@ -5,4 +5,7 @@
     <string name="gender">Gender</string>
     <string name="school">School</string>
     <string name="hobbies">Hobbies</string>
+    <string name="next_button">Next Button</string>
+    <string name="last_button">Previous Button</string>
+    <string name="user_profile_photo">User profile photo</string>
 </resources>
