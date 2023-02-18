@@ -24,7 +24,7 @@ class UsersRepository {
     val config : LiveData<ProfileConfig> get() = profileConfiguration
 
 
-    private fun getUsersApi() {
+    private fun getUserDataApi() {
         val call = networkConn.serviceApi.getAllUsers()
         val listOfUsers = mutableListOf<User>()
 
@@ -43,6 +43,7 @@ class UsersRepository {
                    val dataObject = UsersInfo(listOfUsers)
                    usersInfoLiveData.value = dataObject
                }
+                getProfileConfigApi()
             }
             override fun onFailure(call: Call<UsersInfo>, t: Throwable) {
                  if (t is SocketTimeoutException) {
@@ -56,7 +57,6 @@ class UsersRepository {
     }
 
    private fun getProfileConfigApi() {
-        var configResponse = ProfileConfig(listOf())
         val call = networkConn.serviceApi.getConfig()
 
        call.enqueue(object : Callback<ProfileConfig>{
@@ -76,9 +76,9 @@ class UsersRepository {
        })
     }
 
-    fun getUsers() {
+    fun getUsersData() {
         CoroutineScope(Dispatchers.IO).launch {
-             getUsersApi()
+             getUserDataApi()
         }
     }
 
@@ -87,11 +87,6 @@ class UsersRepository {
     }
     fun getConfigLiveData() : LiveData<ProfileConfig> {
         return config
-    }
-    fun getProfileConfig()  {
-        CoroutineScope(Dispatchers.IO).launch {
-         getProfileConfigApi()
-        }
     }
 
 }
