@@ -35,6 +35,7 @@ class ProfileViewFragment : Fragment() {
             adapter = userViewAdapter
         }
         initListeners()
+        dataRetrieval()
     }
 
     private fun initAdapters() {
@@ -42,7 +43,7 @@ class ProfileViewFragment : Fragment() {
     }
 
     private fun initObservers() {
-        viewmodel.currentUser.observe(viewLifecycleOwner){
+        viewmodel.currentUserLiveData.observe(viewLifecycleOwner){
             val currUser = it
             userViewAdapter.updateData(currUser)
         }
@@ -65,12 +66,9 @@ class ProfileViewFragment : Fragment() {
 
 
     private fun initListeners() {
-
             binding.nextFAB.setOnClickListener{
                 viewmodel.updateIndexToNextUser()
             }
-
-        dataRetrieval()
     }
 
 

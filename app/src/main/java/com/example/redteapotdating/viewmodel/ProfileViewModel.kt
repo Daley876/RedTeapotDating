@@ -21,8 +21,8 @@ class ProfileViewModel : ViewModel() {
     val nextBtnLiveData : LiveData<Boolean> get() = nextBtn
 
     private var currUserIndex : MutableLiveData<Int> = MutableLiveData(0)
-     var currentUser : MutableLiveData<User> = MutableLiveData<User>()
-
+    private var currentUser : MutableLiveData<User> = MutableLiveData<User>()
+    val currentUserLiveData : LiveData<User> get() = currentUser
 
     private fun getAllLatestUsers() : UsersInfo? {
         return listOfUsers.value
