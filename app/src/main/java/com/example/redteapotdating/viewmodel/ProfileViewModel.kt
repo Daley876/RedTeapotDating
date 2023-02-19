@@ -12,27 +12,42 @@ class ProfileViewModel : ViewModel() {
     private val repo = UsersRepository()
 
     //observable values in repo that are updated after each api call
-    private val listOfUsers : LiveData<UsersInfo> get() = repo.getUsersLiveData()
+    val listOfUsers : LiveData<UsersInfo> get() = repo.getUsersLiveData()
     val config : LiveData<ProfileConfig> get() = repo.getConfigLiveData()
+    private var preBtn : MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
+    private var nextBtn : MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
+
+    val lastBtnLiveData : LiveData<Boolean> get() = preBtn
+    val nextBtnLiveData : LiveData<Boolean> get() = nextBtn
 
     private var currUserIndex : MutableLiveData<Int> = MutableLiveData(0)
      var currentUser : MutableLiveData<User> = MutableLiveData<User>()
 
 
-    fun getAllLatestUsers() : UsersInfo? {
+    private fun getAllLatestUsers() : UsersInfo? {
         return listOfUsers.value
     }
 
-    fun getCurrUserIndex () : Int {
+    private fun getCurrUserIndex () : Int {
        return currUserIndex.value!!
     }
 
-    private fun updateCurrentUser() {
+    fun updateCurrentUser() {
         val index = currUserIndex.value
         val users = listOfUsers.value?.users
         if (!users.isNullOrEmpty()) {
-            //currentUser.postValue(users[index!!])
-            currentUser.value = users[index!!]
+            currentUser.postValue(users[index!!])
+        }
+        navButtonsVisibility()
+    }
+
+    private fun navButtonsVisibility() {
+        if (listOfUsers.value == null || listOfUsers.value!!.users.isEmpty()) {
+            preBtn.value = false
+            nextBtn.value = false
+        } else {
+            preBtn.value = getCurrUserIndex() > 0
+            nextBtn.value = getCurrUserIndex() + 1 < getAllLatestUsers()!!.users.size
         }
     }
 

@@ -35,7 +35,22 @@ class ProfileViewFragment : Fragment() {
         viewmodel.currentUser.observe(viewLifecycleOwner){
             val currUser = it
             updateUI(currUser)
-            navButtonsVisibility()
+        }
+
+        viewmodel.listOfUsers.observe(viewLifecycleOwner){
+            viewmodel.updateCurrentUser()
+        }
+
+        viewmodel.nextBtnLiveData.observe(viewLifecycleOwner){
+            val bool = it
+            if (bool) binding.nextFAB.visibility = View.VISIBLE
+            else binding.nextFAB.visibility = View.INVISIBLE
+        }
+
+        viewmodel.lastBtnLiveData.observe(viewLifecycleOwner){
+            val bool = it
+            if (bool) binding.prevFAB.visibility = View.VISIBLE
+            else binding.prevFAB.visibility = View.INVISIBLE
         }
     }
     private fun updateUI(currUser: User) {
@@ -88,23 +103,6 @@ class ProfileViewFragment : Fragment() {
 
     }
 
-    private fun navButtonsVisibility() {
-        if (viewmodel.getAllLatestUsers() == null || viewmodel.getAllLatestUsers()!!.users.isEmpty()) {
-            binding.nextFAB.visibility = View.INVISIBLE
-            binding.prevFAB.visibility = View.INVISIBLE
-        } else {
-            if (viewmodel.getCurrUserIndex() <= 0) {
-                binding.prevFAB.visibility = View.INVISIBLE
-            } else {
-                binding.prevFAB.visibility = View.VISIBLE
-            }
-            if (viewmodel.getCurrUserIndex() + 1 >= viewmodel.getAllLatestUsers()!!.users.size) {
-                binding.nextFAB.visibility = View.INVISIBLE
-            } else {
-                binding.nextFAB.visibility = View.VISIBLE
-            }
-        }
-    }
 
     private fun dataRetrieval() {
         viewmodel.getUsersApiCall()

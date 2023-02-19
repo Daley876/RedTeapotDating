@@ -26,7 +26,7 @@ class UsersRepository {
 
     private fun getUserDataApi() {
         val call = networkConn.serviceApi.getAllUsers()
-        val listOfUsers = mutableListOf<User>()
+        val listOfCurrUsers = mutableListOf<User>()
 
 
         call.enqueue(object : Callback<UsersInfo>{
@@ -38,10 +38,10 @@ class UsersRepository {
                      val user = User(c.about,
                                 c.gender,c.hobbies,
                                 c.id,c.name,c.photo,c.school)
-                     listOfUsers.add(user)
+                     listOfCurrUsers.add(user)
                  }
-                   val dataObject = UsersInfo(listOfUsers)
-                   usersInfoLiveData.value = dataObject
+                   val dataObject = UsersInfo(listOfCurrUsers)
+                   usersInfoLiveData.postValue(dataObject)
                }
                 getProfileConfigApi()
             }
@@ -65,7 +65,7 @@ class UsersRepository {
                if (response.body() != null && response.isSuccessful) {
                    val data = response.body()
                    val profileConfig = ProfileConfig(data?.profile!!)
-                   profileConfiguration.value = profileConfig
+                   profileConfiguration.postValue(profileConfig)
                }
            }
 
