@@ -12,8 +12,8 @@ class ProfileViewModel : ViewModel() {
     private val repo = UsersRepository()
 
     //observable values in repo that are updated after each api call
-    val listOfUsers : LiveData<UsersInfo> get() = repo.getUsersLiveData()
-    private val config : LiveData<ProfileConfig> get() = repo.getConfigLiveData()
+     val listOfUsers : LiveData<UsersInfo> get() = repo.getUsersLiveData()
+    val config : LiveData<ProfileConfig> get() = repo.getConfigLiveData()
 
     private var nextBtn : MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
 
@@ -54,10 +54,6 @@ class ProfileViewModel : ViewModel() {
         val newIndex = currIndex?.plus(1)
         currUserIndex.value = newIndex!!
         updateCurrentUser()
-    }
-
-    fun getProfileConfigurationValue() : ProfileConfig? {
-        return config.value
     }
 
      fun getUsersApiCall(){

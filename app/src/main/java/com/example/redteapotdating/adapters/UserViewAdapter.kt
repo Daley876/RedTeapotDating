@@ -75,8 +75,10 @@ class UserViewAdapter (context : Context, currentUser : User): RecyclerView.Adap
                aboutSection.visibility=View.VISIBLE
            }
             if (currUser.school == null)  schoolSection.visibility=View.GONE
-            else {schoolSection.visibility=View.VISIBLE
-                schoolTv.text = currUser.school}
+            else {
+                schoolSection.visibility=View.VISIBLE
+                schoolTv.text = currUser.school
+            }
                nameTv.text = currUser.name
             genderTv.text = currUser.gender
             schoolTv.text = currUser.school

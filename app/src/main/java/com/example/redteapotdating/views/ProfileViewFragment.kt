@@ -30,7 +30,7 @@ class ProfileViewFragment : Fragment() {
         initAdapters()
         initViewModel()
         initObservers()
-        binding.recyclerViewIncluded.recyclerView.apply {
+        binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = userViewAdapter
         }
@@ -47,6 +47,10 @@ class ProfileViewFragment : Fragment() {
             userViewAdapter.updateData(currUser)
         }
 
+        viewmodel.config.observe(viewLifecycleOwner){
+            val configChanges = it
+
+        }
         viewmodel.listOfUsers.observe(viewLifecycleOwner){
             viewmodel.updateCurrentUser()
         }
