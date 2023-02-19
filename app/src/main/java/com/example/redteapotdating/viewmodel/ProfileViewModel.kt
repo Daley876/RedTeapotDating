@@ -11,18 +11,17 @@ import com.example.redteapotdating.repository.UsersRepository
 class ProfileViewModel : ViewModel() {
     private val repo = UsersRepository()
 
-    //observable values in repo that are updated after each api call
-     val listOfUsers : LiveData<UsersInfo> get() = repo.getUsersLiveData()
-    val config : LiveData<ProfileConfig> get() = repo.getConfigLiveData()
-
     private var nextBtn : MutableLiveData<Boolean> = MutableLiveData<Boolean>(false)
-
-
-    val nextBtnLiveData : LiveData<Boolean> get() = nextBtn
-
     private var currUserIndex : MutableLiveData<Int> = MutableLiveData(0)
     private var currentUser : MutableLiveData<User> = MutableLiveData<User>()
+
+    //observable values in repo that are updated after each api call
+    val listOfUsers : LiveData<UsersInfo> get() = repo.getUsersLiveData()
+    val config : LiveData<ProfileConfig> get() = repo.getConfigLiveData()
+
+    val nextBtnLiveData : LiveData<Boolean> get() = nextBtn
     val currentUserLiveData : LiveData<User> get() = currentUser
+
 
     private fun getAllLatestUsers() : UsersInfo? {
         return listOfUsers.value
@@ -32,6 +31,14 @@ class ProfileViewModel : ViewModel() {
        return currUserIndex.value!!
     }
 
+    private fun navButtonsVisibility() {
+        if (listOfUsers.value == null || listOfUsers.value!!.users.isEmpty()) {
+            nextBtn.value = false
+        } else {
+            nextBtn.value = getCurrUserIndex() + 1 < getAllLatestUsers()!!.users.size
+        }
+    }
+
     fun updateCurrentUser() {
         val index = currUserIndex.value
         val users = listOfUsers.value?.users
@@ -39,14 +46,6 @@ class ProfileViewModel : ViewModel() {
             currentUser.postValue(users[index!!])
         }
         navButtonsVisibility()
-    }
-
-    private fun navButtonsVisibility() {
-        if (listOfUsers.value == null || listOfUsers.value!!.users.isEmpty()) {
-            nextBtn.value = false
-        } else {
-            nextBtn.value = getCurrUserIndex() + 1 < getAllLatestUsers()!!.users.size
-        }
     }
 
     fun updateIndexToNextUser(){
