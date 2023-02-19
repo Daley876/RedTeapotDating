@@ -30,7 +30,7 @@ class ProfileViewFragment : Fragment() {
         initAdapters()
         initViewModel()
         initObservers()
-        binding.recyclerViewIncluded.recyclerView.apply {
+        binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = userViewAdapter
         }
@@ -47,6 +47,10 @@ class ProfileViewFragment : Fragment() {
             userViewAdapter.updateData(currUser)
         }
 
+        viewmodel.config.observe(viewLifecycleOwner){
+            val configChanges = it
+
+        }
         viewmodel.listOfUsers.observe(viewLifecycleOwner){
             viewmodel.updateCurrentUser()
         }
@@ -55,12 +59,6 @@ class ProfileViewFragment : Fragment() {
             val bool = it
             if (bool) binding.nextFAB.visibility = View.VISIBLE
             else binding.nextFAB.visibility = View.INVISIBLE
-        }
-
-        viewmodel.lastBtnLiveData.observe(viewLifecycleOwner){
-            val bool = it
-            if (bool) binding.prevFAB.visibility = View.VISIBLE
-            else binding.prevFAB.visibility = View.INVISIBLE
         }
     }
 
@@ -72,9 +70,6 @@ class ProfileViewFragment : Fragment() {
                 viewmodel.updateIndexToNextUser()
             }
 
-            binding.prevFAB.setOnClickListener{
-                viewmodel.updateIndexToLastUser()
-            }
         dataRetrieval()
     }
 

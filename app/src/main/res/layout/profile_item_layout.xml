@@ -7,6 +7,7 @@
             android:id="@+id/main_profile_layout"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="match_parent"
@@ -51,7 +52,7 @@
                     android:id="@+id/tv_gender_info"
                     android:layout_width="match_parent"
                     android:layout_marginTop="10dp"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
                     android:fontFamily="sans-serif"
@@ -82,7 +83,7 @@
                     android:id="@+id/tv_about_info"
                     android:layout_width="match_parent"
                     android:layout_marginTop="10dp"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
                     android:fontFamily="sans-serif"
@@ -113,7 +114,7 @@
                     android:id="@+id/tv_school_info"
                     android:layout_width="match_parent"
                     android:layout_marginTop="10dp"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
                     android:fontFamily="sans-serif"
@@ -145,7 +146,7 @@
                     android:id="@+id/tv_hobbies_info"
                     android:layout_width="match_parent"
                     android:layout_marginTop="10dp"
-                    android:textSize="15sp"
+                    android:textSize="20sp"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
                     android:fontFamily="sans-serif"
