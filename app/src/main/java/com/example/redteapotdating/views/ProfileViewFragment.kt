@@ -6,35 +6,45 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
-import com.example.redteapotdating.R
-import com.example.redteapotdating.databinding.ProfileItemLayoutBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.redteapotdating.adapters.UserViewAdapter
+import com.example.redteapotdating.databinding.MainViewLayoutBinding
 import com.example.redteapotdating.model.User
 import com.example.redteapotdating.viewmodel.ProfileViewModel
 
 class ProfileViewFragment : Fragment() {
     private lateinit var viewmodel : ProfileViewModel
-    private lateinit var binding : ProfileItemLayoutBinding
+    private lateinit var binding : MainViewLayoutBinding
+    private lateinit var userViewAdapter: UserViewAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = ProfileItemLayoutBinding.inflate(inflater,container,false)
+        binding = MainViewLayoutBinding.inflate(inflater,container,false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initAdapters()
         initViewModel()
         initObservers()
+        binding.recyclerViewIncluded.recyclerView.apply {
+            layoutManager = LinearLayoutManager(requireActivity())
+            adapter = userViewAdapter
+        }
         initListeners()
+    }
+
+    private fun initAdapters() {
+        userViewAdapter = UserViewAdapter(requireContext(),User(null,"", listOf(),0,"",null,""))
     }
 
     private fun initObservers() {
         viewmodel.currentUser.observe(viewLifecycleOwner){
             val currUser = it
-            updateUI(currUser)
+            userViewAdapter.updateData(currUser)
         }
 
         viewmodel.listOfUsers.observe(viewLifecycleOwner){
@@ -53,38 +63,7 @@ class ProfileViewFragment : Fragment() {
             else binding.prevFAB.visibility = View.INVISIBLE
         }
     }
-    private fun updateUI(currUser: User) {
-        binding.tvAboutInfo.text = currUser.about
-        binding.tvName.text = currUser.name
-        binding.tvGenderInfo.text = currUser.gender
-        binding.tvSchoolInfo.text = currUser.school
-        setUserProfilePic(currUser)
-        setUserHobbies(currUser)
-    }
 
-    private fun setUserHobbies(currUser: User) {
-        val hobbies = currUser.hobbies
-        if (hobbies != null) {
-            val hobbiesList = StringBuilder("")
-            for (i in hobbies.indices){
-                if (i == hobbies.size-1){
-                    val hobby = hobbies[i]
-                    hobbiesList.append(hobby)
-                } else {
-                    val hobby = hobbies[i]
-                    hobbiesList.append("$hobby, ")
-                }
-            }
-            binding.tvHobbiesInfo.text = hobbiesList.toString()
-        }
-    }
-
-    private fun setUserProfilePic(currUser: User) {
-        Glide.with(requireContext())
-            .load(currUser.photo)
-            .error(R.drawable.ic_launcher_foreground)
-            .into(binding.profilePic)
-    }
 
 
     private fun initListeners() {
@@ -96,11 +75,7 @@ class ProfileViewFragment : Fragment() {
             binding.prevFAB.setOnClickListener{
                 viewmodel.updateIndexToLastUser()
             }
-
-        binding.searchFAB.setOnClickListener{
-            dataRetrieval()
-        }
-
+        dataRetrieval()
     }
 
 
