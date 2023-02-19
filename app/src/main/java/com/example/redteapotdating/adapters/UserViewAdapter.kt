@@ -1,37 +1,23 @@
 package com.example.redteapotdating.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.redteapotdating.R
 import com.example.redteapotdating.databinding.ProfileItemLayoutBinding
 import com.example.redteapotdating.model.User
 
-class UserViewAdapter (context : Context, currentUser : User): RecyclerView.Adapter<UserViewAdapter.ProfileDataViewHolder>() {
+class UserViewAdapter (currentUser : User): RecyclerView.Adapter<UserViewAdapter.ProfileDataViewHolder>() {
     private var currUser = currentUser
     private lateinit var binding : ProfileItemLayoutBinding
-    private val adapterContext = context
 
     fun updateData (currentUser : User?) {
         if (currentUser != null) {
             currUser = currentUser
-            navAnimation()
             notifyDataSetChanged()
         }
-    }
-
-    private fun navAnimation() {
-        val fadeOutAnimation = AnimationUtils.loadAnimation(adapterContext, R.anim.fade_out)
-        fadeOutAnimation.duration = 2000
-        val fadeInAnimation = AnimationUtils.loadAnimation(adapterContext, R.anim.fade_in)
-        fadeInAnimation.duration = 2000
-
-        binding.mainProfileLayout.startAnimation(fadeOutAnimation)
-        binding.mainProfileLayout.startAnimation(fadeInAnimation)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileDataViewHolder {
@@ -87,8 +73,7 @@ class UserViewAdapter (context : Context, currentUser : User): RecyclerView.Adap
         fun bindProfilePic(url : String?){
             Glide.with(photoTv.context)
                 .load(url)
-                .placeholder(R.drawable.ic_launcher_foreground)
-                .error(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.blank_user)
                 .into(photoTv)
         }
         fun bindHobbies(hobbies : List<String>){
