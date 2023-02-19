@@ -79,8 +79,6 @@ class ProfileViewFragment : Fragment() {
         }
     }
 
-
-
     private fun initListeners() {
             binding.nextFAB.setOnClickListener{
                 navProfileTransitions()
