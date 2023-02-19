@@ -23,8 +23,8 @@ class LayoutViewAdapter (currentUser : User, config : ProfileConfig): RecyclerVi
                 NameViewHolder(binding)
             }
             ITEM_SCHOOL -> {
-                    val binding = ProfileItemSchoolLayoutBinding.inflate(layoutInflater,parent,false)
-                    SchoolViewHolder(binding)
+                val binding = ProfileItemSchoolLayoutBinding.inflate(layoutInflater,parent,false)
+                SchoolViewHolder(binding)
             }
             ITEM_ABOUT -> {
                 val binding = ProfileItemAboutLayoutBinding.inflate(layoutInflater,parent,false)
