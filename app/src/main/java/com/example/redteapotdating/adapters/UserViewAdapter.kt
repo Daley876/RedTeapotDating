@@ -26,9 +26,9 @@ class UserViewAdapter (context : Context, currentUser : User): RecyclerView.Adap
 
     private fun navAnimation() {
         val fadeOutAnimation = AnimationUtils.loadAnimation(adapterContext, R.anim.fade_out)
-        fadeOutAnimation.duration = 1500
+        fadeOutAnimation.duration = 2000
         val fadeInAnimation = AnimationUtils.loadAnimation(adapterContext, R.anim.fade_in)
-        fadeInAnimation.duration = 1500
+        fadeInAnimation.duration = 2000
 
         binding.mainProfileLayout.startAnimation(fadeOutAnimation)
         binding.mainProfileLayout.startAnimation(fadeInAnimation)

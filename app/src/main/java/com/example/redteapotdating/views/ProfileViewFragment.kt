@@ -56,12 +56,6 @@ class ProfileViewFragment : Fragment() {
             if (bool) binding.nextFAB.visibility = View.VISIBLE
             else binding.nextFAB.visibility = View.INVISIBLE
         }
-
-        viewmodel.lastBtnLiveData.observe(viewLifecycleOwner){
-            val bool = it
-            if (bool) binding.prevFAB.visibility = View.VISIBLE
-            else binding.prevFAB.visibility = View.INVISIBLE
-        }
     }
 
 
@@ -72,9 +66,6 @@ class ProfileViewFragment : Fragment() {
                 viewmodel.updateIndexToNextUser()
             }
 
-            binding.prevFAB.setOnClickListener{
-                viewmodel.updateIndexToLastUser()
-            }
         dataRetrieval()
     }
 
