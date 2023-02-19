@@ -113,6 +113,7 @@ class LayoutViewAdapter (currentUser : User, config : ProfileConfig): RecyclerVi
             notifyDataSetChanged()
         }
     }
+
     class NameViewHolder(binding: ProfileItemNameLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         private val nameTv = binding.tvName
 
@@ -121,30 +122,33 @@ class LayoutViewAdapter (currentUser : User, config : ProfileConfig): RecyclerVi
         }
 
     }
+
     class AboutViewHolder(binding: ProfileItemAboutLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         private val aboutSection = binding.aboutSection
         private val aboutTv = binding.tvAboutInfo
 
         fun bind(currUser: User) {
-            if (currUser.about == null || currUser.about.isEmpty()) aboutSection.visibility = View.GONE
+            if (currUser.about.isNullOrEmpty()) aboutSection.visibility = View.GONE
             else {
                 aboutTv.text = currUser.about
                 aboutSection.visibility = View.VISIBLE
             }
         }
     }
+
     class SchoolViewHolder(binding: ProfileItemSchoolLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         private val schoolSection = binding.schoolSection
         private val schoolTv = binding.tvSchoolInfo
 
         fun bind(currUser: User){
-            if (currUser.school == null || currUser.school.isEmpty())  schoolSection.visibility=View.GONE
+            if (currUser.school.isNullOrEmpty())  schoolSection.visibility=View.GONE
             else {
                 schoolSection.visibility=View.VISIBLE
                 schoolTv.text = currUser.school
             }
         }
     }
+
     class GenderViewHolder(binding: ProfileItemGenderLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         private val genderTv = binding.tvGenderInfo
 
@@ -152,6 +156,7 @@ class LayoutViewAdapter (currentUser : User, config : ProfileConfig): RecyclerVi
             genderTv.text = currUser.gender
         }
     }
+
     class HobbiesViewHolder(binding: ProfileItemHobbiesLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         private val hobbiesTv = binding.tvHobbiesInfo
         private val hobbiesSection = binding.hobbiesSection
@@ -175,6 +180,7 @@ class LayoutViewAdapter (currentUser : User, config : ProfileConfig): RecyclerVi
             }
         }
     }
+
     class PhotoViewHolder(binding: ProfileItemPhotoLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         private val photoTv = binding.profilePic
 
