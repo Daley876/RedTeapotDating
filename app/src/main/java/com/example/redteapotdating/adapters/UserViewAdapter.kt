@@ -60,34 +60,34 @@ class UserViewAdapter (context : Context, currentUser : User): RecyclerView.Adap
     }
 
     class ProfileDataViewHolder(binding: ProfileItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-        private var name_tv = binding.tvName
+        private var nameTv = binding.tvName
         private var schoolSection = binding.schoolSection
         private var aboutSection = binding.aboutSection
-        private var school_tv = binding.tvSchoolInfo
-        private var about_tv = binding.tvAboutInfo
-        private var gender_tv = binding.tvGenderInfo
-         var hobbies_tv = binding.tvHobbiesInfo
-         var photo_tv = binding.profilePic
+        private var schoolTv = binding.tvSchoolInfo
+        private var aboutTv = binding.tvAboutInfo
+        private var genderTv = binding.tvGenderInfo
+         var hobbiesTv = binding.tvHobbiesInfo
+         var photoTv = binding.profilePic
 
         fun bind(currUser: User){
            if (currUser.about == null)  aboutSection.visibility=View.GONE
-           else { about_tv.text = currUser.about
+           else { aboutTv.text = currUser.about
                aboutSection.visibility=View.VISIBLE
            }
             if (currUser.school == null)  schoolSection.visibility=View.GONE
             else {schoolSection.visibility=View.VISIBLE
-                school_tv.text = currUser.school}
-               name_tv.text = currUser.name
-            gender_tv.text = currUser.gender
-            school_tv.text = currUser.school
+                schoolTv.text = currUser.school}
+               nameTv.text = currUser.name
+            genderTv.text = currUser.gender
+            schoolTv.text = currUser.school
         }
 
         fun bindProfilePic(url : String?){
-            Glide.with(photo_tv.context)
+            Glide.with(photoTv.context)
                 .load(url)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_launcher_foreground)
-                .into(photo_tv)
+                .into(photoTv)
         }
         fun bindHobbies(hobbies : List<String>){
                 val hobbiesList = StringBuilder("")
@@ -100,7 +100,7 @@ class UserViewAdapter (context : Context, currentUser : User): RecyclerView.Adap
                         hobbiesList.append("$hobby, ")
                     }
                 }
-            hobbies_tv.text = hobbiesList.toString()
+            hobbiesTv.text = hobbiesList.toString()
         }
 
     }
