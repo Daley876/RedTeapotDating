@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<LinearLayout
+                android:id="@+id/about_section"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tv_about"
+                    android:layout_width="match_parent"
+                    android:textSize="30sp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/about"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_about_info"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:textSize="20sp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/sample_name"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+
+</layout>
