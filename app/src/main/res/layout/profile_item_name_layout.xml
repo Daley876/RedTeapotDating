@@ -5,6 +5,7 @@
     <LinearLayout
         android:id="@+id/name_section"
         android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
@@ -12,7 +13,6 @@
             android:id="@+id/tv_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:fontFamily="sans-serif"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"

@@ -64,6 +64,7 @@ class ProfileViewFragment : Fragment() {
     private fun initObservers() {
         viewmodel.currentUserLiveData.observe(viewLifecycleOwner){
             val currUser = it
+            binding.animationLayout.visibility = View.GONE
             layoutViewAdapter.updateUserData(currUser)
         }
 
@@ -88,6 +89,7 @@ class ProfileViewFragment : Fragment() {
             }
         binding.searchBtn.setOnClickListener {
             dataRetrieval()
+            binding.animationLayout.visibility = View.VISIBLE
             it.visibility = View.GONE
         }
     }
