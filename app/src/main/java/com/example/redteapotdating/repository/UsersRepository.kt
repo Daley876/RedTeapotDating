@@ -69,7 +69,7 @@ class UsersRepository {
        })
     }
 
-    fun getUsersData() {
+    fun retrieveUsersData() {
         CoroutineScope(Dispatchers.IO).launch {
              getUserDataApi()
             getProfileConfigApi()
