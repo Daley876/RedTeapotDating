@@ -30,19 +30,21 @@ class ProfileViewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initAdapters()
         initViewModel()
         initObservers()
+        initListeners()
+    }
+
+    private fun initRecyclerView() {
+        initAdapters()
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = layoutViewAdapter
         }
-        initListeners()
-        dataRetrieval()
     }
 
     private fun initAdapters() {
-        val initialUser = User(null,"", listOf(),0,"",null,"")
+        val initialUser = User("","", listOf(),0,"","","")
         val initialConfig = ProfileConfig(listOf("name", "photo", "gender", "about", "school", "hobbies"))
         layoutViewAdapter = LayoutViewAdapter(initialUser, initialConfig)
     }
@@ -69,7 +71,7 @@ class ProfileViewFragment : Fragment() {
             layoutViewAdapter.updateConfigData(configChanges)
         }
         viewmodel.listOfUsers.observe(viewLifecycleOwner){
-            viewmodel.updateCurrentUser()
+            viewmodel.updateCurrentUserOnScreen()
         }
 
         viewmodel.nextBtnLiveData.observe(viewLifecycleOwner){
@@ -83,6 +85,11 @@ class ProfileViewFragment : Fragment() {
             binding.nextFAB.setOnClickListener{
                 navProfileTransitions()
             }
+        binding.searchBtn.setOnClickListener {
+            dataRetrieval()
+            initRecyclerView()
+            it.visibility = View.GONE
+        }
     }
 
 

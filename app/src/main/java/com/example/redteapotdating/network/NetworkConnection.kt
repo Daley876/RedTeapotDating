@@ -11,7 +11,7 @@ object NetworkConnection {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-     val serviceApi = retrofit.create(MyApiServices::class.java)
+     val serviceApi: ProfileOrderServicesApi = retrofit.create(ProfileOrderServicesApi::class.java)
 
    // val connect = ServiceConnection(serviceApi)
 

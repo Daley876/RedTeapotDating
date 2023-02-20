@@ -43,7 +43,6 @@ class UsersRepository {
                    val dataObject = UsersInfo(listOfCurrUsers)
                    usersInfoLiveData.postValue(dataObject)
                }
-                getProfileConfigApi()
             }
             override fun onFailure(call: Call<UsersInfo>, t: Throwable) {
                  if (t is SocketTimeoutException) {
@@ -79,6 +78,7 @@ class UsersRepository {
     fun getUsersData() {
         CoroutineScope(Dispatchers.IO).launch {
              getUserDataApi()
+            getProfileConfigApi()
         }
     }
 

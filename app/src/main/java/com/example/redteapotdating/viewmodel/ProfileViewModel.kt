@@ -39,7 +39,7 @@ class ProfileViewModel : ViewModel() {
         }
     }
 
-    fun updateCurrentUser() {
+    fun updateCurrentUserOnScreen() {
         val index = currUserIndex.value
         val users = listOfUsers.value?.users
         if (!users.isNullOrEmpty()) {
@@ -52,7 +52,7 @@ class ProfileViewModel : ViewModel() {
         val currIndex = currUserIndex.value
         val newIndex = currIndex?.plus(1)
         currUserIndex.value = newIndex!!
-        updateCurrentUser()
+        updateCurrentUserOnScreen()
     }
 
      fun getUsersApiCall(){

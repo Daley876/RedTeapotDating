@@ -5,7 +5,7 @@ import com.example.redteapotdating.model.UsersInfo
 import retrofit2.Call
 import retrofit2.http.GET
 
-interface MyApiServices {
+interface ProfileOrderServicesApi {
 
     @GET("users")
     fun getAllUsers() : Call<UsersInfo>
