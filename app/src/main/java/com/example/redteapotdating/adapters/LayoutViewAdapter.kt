@@ -9,10 +9,10 @@ import com.example.redteapotdating.databinding.*
 import com.example.redteapotdating.model.ProfileConfig
 import com.example.redteapotdating.model.User
 
-class LayoutViewAdapter(currentUser: User, config: ProfileConfig) :
+class LayoutViewAdapter(currUser: User, config: ProfileConfig) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var profileConfig = config
-    private var currUser = currentUser
+    private var currentUser = currUser
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val context = parent.context
@@ -54,27 +54,27 @@ class LayoutViewAdapter(currentUser: User, config: ProfileConfig) :
         when (holder.itemViewType) {
             ITEM_NAME -> {
                 val nameHolder = holder as NameViewHolder
-                nameHolder.bind(currUser)
+                nameHolder.bind(currentUser)
             }
             ITEM_ABOUT -> {
                 val aboutHolder = holder as AboutViewHolder
-                aboutHolder.bind(currUser)
+                aboutHolder.bind(currentUser)
             }
             ITEM_SCHOOL -> {
                 val schoolHolder = holder as SchoolViewHolder
-                schoolHolder.bind(currUser)
+                schoolHolder.bind(currentUser)
             }
             ITEM_GENDER -> {
                 val genderHolder = holder as GenderViewHolder
-                genderHolder.bind(currUser)
+                genderHolder.bind(currentUser)
             }
             ITEM_HOBBIES -> {
                 val hobbiesHolder = holder as HobbiesViewHolder
-                hobbiesHolder.bindHobbies(currUser.hobbies!!)
+                hobbiesHolder.bindHobbies(currentUser.hobbies!!)
             }
             ITEM_PHOTO -> {
                 val photoHolder = holder as PhotoViewHolder
-                photoHolder.bindProfilePic(currUser.photo, currUser.gender)
+                photoHolder.bindProfilePic(currentUser.photo, currentUser.gender)
             }
         }
     }
@@ -87,11 +87,11 @@ class LayoutViewAdapter(currentUser: User, config: ProfileConfig) :
         return if (profileConfig.profile[position].equals("name", ignoreCase = true)) {
             ITEM_NAME
         } else if (profileConfig.profile[position].equals("school", ignoreCase = true)) {
-            if (currUser.school.isNullOrEmpty()) ITEM_EMPTY else ITEM_SCHOOL
+            if (currentUser.school.isNullOrEmpty()) ITEM_EMPTY else ITEM_SCHOOL
         } else if (profileConfig.profile[position].equals("hobbies", ignoreCase = true)) {
-            if (currUser.hobbies.isNullOrEmpty()) ITEM_EMPTY else ITEM_HOBBIES
+            if (currentUser.hobbies.isNullOrEmpty()) ITEM_EMPTY else ITEM_HOBBIES
         } else if (profileConfig.profile[position].equals("about", ignoreCase = true)) {
-            if (currUser.about.isNullOrEmpty()) ITEM_EMPTY else ITEM_ABOUT
+            if (currentUser.about.isNullOrEmpty()) ITEM_EMPTY else ITEM_ABOUT
         } else if (profileConfig.profile[position].equals("photo", ignoreCase = true)) {
             ITEM_PHOTO
         } else if (profileConfig.profile[position].equals("gender", ignoreCase = true)) {
@@ -99,9 +99,9 @@ class LayoutViewAdapter(currentUser: User, config: ProfileConfig) :
         } else ITEM_EMPTY
     }
 
-    fun updateUserData(currentUser: User?) {
-        if (currentUser != null) {
-            currUser = currentUser
+    fun updateUserData(currUser: User?) {
+        if (currUser != null) {
+            currentUser = currUser
             notifyDataSetChanged()
         }
     }
