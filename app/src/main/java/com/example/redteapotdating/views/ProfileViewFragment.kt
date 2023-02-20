@@ -42,7 +42,7 @@ class ProfileViewFragment : Fragment() {
     }
 
     private fun initAdapters() {
-        val initialUser = User(null,"", listOf(),0,"",null,"")
+        val initialUser = User("","", listOf(),0,"","","")
         val initialConfig = ProfileConfig(listOf("name", "photo", "gender", "about", "school", "hobbies"))
         layoutViewAdapter = LayoutViewAdapter(initialUser, initialConfig)
     }

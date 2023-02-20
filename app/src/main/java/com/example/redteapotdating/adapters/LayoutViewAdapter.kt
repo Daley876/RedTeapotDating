@@ -97,7 +97,7 @@ class LayoutViewAdapter(currentUser: User, config: ProfileConfig) :
             if (currUser.about.isNullOrEmpty()) ITEM_EMPTY else ITEM_ABOUT
         }
         else if (profileConfig.profile[position].equals("photo", ignoreCase = true)) {
-            if (currUser.photo.isNullOrEmpty()) ITEM_EMPTY else ITEM_PHOTO
+            ITEM_PHOTO
         }
         else if (profileConfig.profile[position].equals("gender", ignoreCase = true)) {
             if (currUser.photo.isNullOrEmpty()) ITEM_EMPTY else ITEM_GENDER
@@ -182,8 +182,7 @@ class LayoutViewAdapter(currentUser: User, config: ProfileConfig) :
         fun bindProfilePic(url: String?) {
                 Glide.with(photoTv.context)
                     .load(url)
-                    .placeholder(R.drawable.image_missing)
-                    .error(R.drawable.error_image)
+                    .error(R.drawable.blank_user)
                     .into(photoTv)
         }
     }
