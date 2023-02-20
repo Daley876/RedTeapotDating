@@ -6,4 +6,6 @@
     <string name="hobbies">Hobbies</string>
     <string name="next_button_content_description">Next Button</string>
     <string name="user_profile_photo_content_description">User profile photo</string>
+    <string name="search_button">Find Matches</string>
+    <string name="search_button_content_description">Find Matches Button</string>
 </resources>

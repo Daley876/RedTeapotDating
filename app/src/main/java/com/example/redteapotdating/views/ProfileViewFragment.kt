@@ -33,12 +33,14 @@ class ProfileViewFragment : Fragment() {
         initAdapters()
         initViewModel()
         initObservers()
+        initListeners()
+    }
+
+    private fun initRecyclerView() {
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(requireActivity())
             adapter = layoutViewAdapter
         }
-        initListeners()
-        dataRetrieval()
     }
 
     private fun initAdapters() {
@@ -83,6 +85,11 @@ class ProfileViewFragment : Fragment() {
             binding.nextFAB.setOnClickListener{
                 navProfileTransitions()
             }
+        binding.searchBtn.setOnClickListener {
+            dataRetrieval()
+            initRecyclerView()
+            it.visibility = View.GONE
+        }
     }
 
 
