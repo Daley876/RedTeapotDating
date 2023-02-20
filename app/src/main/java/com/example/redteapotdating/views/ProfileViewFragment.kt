@@ -96,7 +96,7 @@ class ProfileViewFragment : Fragment() {
 
 
     private fun dataRetrieval() {
-        viewmodel.getUsersApiCall()
+        viewmodel.retrieveUsersApiCall()
     }
 
     private fun initViewModel() {

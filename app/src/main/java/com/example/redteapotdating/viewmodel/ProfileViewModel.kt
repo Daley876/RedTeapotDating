@@ -55,8 +55,8 @@ class ProfileViewModel : ViewModel() {
         updateCurrentUserOnScreen()
     }
 
-     fun getUsersApiCall(){
-         repo.getUsersData()
+     fun retrieveUsersApiCall(){
+         repo.retrieveUsersData()
     }
 
 }
