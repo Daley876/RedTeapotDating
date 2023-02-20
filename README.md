@@ -32,6 +32,8 @@
 
 - When the fragment is first called, it initalizes the RecyclerView, it's Adapter and the ViewModel. When changes in data retreieved from the web service is reflected in the ViewModel, those changes are observed from the Fragment. The fragment will take the first user in the UsersInfo.users list (at index 0) and call a method in the Adapter which takes that user's data (which is referred to as the currentUser) and display it to the UI. Each time the user navigates to the next profile in the UsersInfo.users list, the index is incremeted by 1 and that user becomes the new "currentUser" which is then sent to the adapter to be displayed in the RecyclerView.
 
+- The user index and current user information is all processed and handled within the View Model. Once the current user is determined, this value is observed from the Fragment which is then communicated to the Adapter 
+
 - The Adapter is created with a companion object of constants of Int value which represents each layout to be inflated. The layouts here refer to the different user profile sections (name, gender, school etc). As some user information can be missing, there is an empty layout option to be used in those cases. The only exception is for cases where the profile photo is missing. In this case, we will upload a default photo to the UI based on the gender of the currentUser.  
 
 
