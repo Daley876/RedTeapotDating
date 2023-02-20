@@ -7,9 +7,9 @@ import retrofit2.http.GET
 
 interface ProfileOrderServicesApi {
 
-    @GET("users")
+    @GET("/users")
     fun getAllUsers() : Call<UsersInfo>
 
-    @GET("config")
+    @GET("/config")
     fun getConfig() : Call <ProfileConfig>
 }

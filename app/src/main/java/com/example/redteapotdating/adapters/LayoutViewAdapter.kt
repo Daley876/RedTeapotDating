@@ -74,7 +74,7 @@ class LayoutViewAdapter(currentUser: User, config: ProfileConfig) :
             }
             ITEM_PHOTO -> {
                 val photoHolder = holder as PhotoViewHolder
-                photoHolder.bindProfilePic(currUser.photo)
+                photoHolder.bindProfilePic(currUser.photo, currUser.gender)
             }
         }
     }
@@ -86,29 +86,17 @@ class LayoutViewAdapter(currentUser: User, config: ProfileConfig) :
     override fun getItemViewType(position: Int): Int {
         return if (profileConfig.profile[position].equals("name", ignoreCase = true)) {
             ITEM_NAME
-        }
-
-        else if (profileConfig.profile[position].equals("school", ignoreCase = true)) {
+        } else if (profileConfig.profile[position].equals("school", ignoreCase = true)) {
             if (currUser.school.isNullOrEmpty()) ITEM_EMPTY else ITEM_SCHOOL
-        }
-
-        else if (profileConfig.profile[position].equals("hobbies", ignoreCase = true)) {
+        } else if (profileConfig.profile[position].equals("hobbies", ignoreCase = true)) {
             if (currUser.hobbies.isNullOrEmpty()) ITEM_EMPTY else ITEM_HOBBIES
-        }
-
-        else if (profileConfig.profile[position].equals("about", ignoreCase = true)) {
+        } else if (profileConfig.profile[position].equals("about", ignoreCase = true)) {
             if (currUser.about.isNullOrEmpty()) ITEM_EMPTY else ITEM_ABOUT
-        }
-
-        else if (profileConfig.profile[position].equals("photo", ignoreCase = true)) {
+        } else if (profileConfig.profile[position].equals("photo", ignoreCase = true)) {
             ITEM_PHOTO
-        }
-
-        else if (profileConfig.profile[position].equals("gender", ignoreCase = true)) {
-            if (currUser.photo.isNullOrEmpty()) ITEM_EMPTY else ITEM_GENDER
-        }
-
-        else ITEM_EMPTY
+        } else if (profileConfig.profile[position].equals("gender", ignoreCase = true)) {
+            ITEM_GENDER
+        } else ITEM_EMPTY
     }
 
     fun updateUserData(currentUser: User?) {
@@ -158,7 +146,13 @@ class LayoutViewAdapter(currentUser: User, config: ProfileConfig) :
         private val genderTv = binding.tvGenderInfo
 
         fun bind(currUser: User) {
-            genderTv.text = currUser.gender
+            val genderToSet: String
+
+            if (currUser.gender.equals("m", ignoreCase = true)
+                || currUser.gender.equals("male", ignoreCase = true)) genderToSet = "Male"
+            else genderToSet = "Female"
+
+            genderTv.text = genderToSet
         }
     }
 
@@ -185,10 +179,14 @@ class LayoutViewAdapter(currentUser: User, config: ProfileConfig) :
         RecyclerView.ViewHolder(binding.root) {
         private val photoTv = binding.profilePic
 
-        fun bindProfilePic(url: String?) {
+        fun bindProfilePic(url: String?, gender: String) {
+            val errorImg = if (gender.equals("f", ignoreCase = true)
+                || gender.equals("female", ignoreCase = true)) R.drawable.ic_baseline_person_f_24
+            else R.drawable.blank_user
+
             Glide.with(photoTv.context)
                 .load(url)
-                .error(R.drawable.blank_user)
+                .error(errorImg)
                 .into(photoTv)
         }
     }
