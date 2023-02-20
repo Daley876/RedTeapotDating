@@ -4,7 +4,7 @@
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/profilePic"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="380dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/user_profile_photo_content_description"
         android:scaleType="centerCrop" />
