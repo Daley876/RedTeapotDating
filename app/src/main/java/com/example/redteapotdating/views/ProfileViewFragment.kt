@@ -69,7 +69,7 @@ class ProfileViewFragment : Fragment() {
             layoutViewAdapter.updateConfigData(configChanges)
         }
         viewmodel.listOfUsers.observe(viewLifecycleOwner){
-            viewmodel.updateCurrentUser()
+            viewmodel.updateCurrentUserOnScreen()
         }
 
         viewmodel.nextBtnLiveData.observe(viewLifecycleOwner){
