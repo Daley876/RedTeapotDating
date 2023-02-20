@@ -197,6 +197,6 @@ class LayoutViewAdapter(currentUser: User, config: ProfileConfig) :
         const val ITEM_ABOUT = 4001
         const val ITEM_SCHOOL = 5001
         const val ITEM_HOBBIES = 6001
-        const val ITEM_EMPTY = 99
+        const val ITEM_EMPTY = 9999
     }
 }
