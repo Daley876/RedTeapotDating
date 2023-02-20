@@ -27,7 +27,6 @@
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
                     android:fontFamily="sans-serif"
-                    android:text="@string/sample_name"
                     android:textColor="@color/black"
                     android:layout_height="wrap_content"/>
             </LinearLayout>

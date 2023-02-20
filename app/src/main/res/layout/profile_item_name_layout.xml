@@ -16,7 +16,6 @@
             android:fontFamily="sans-serif"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
-            android:text="@string/sample_name"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold" />

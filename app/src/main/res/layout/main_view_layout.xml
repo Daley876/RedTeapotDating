@@ -25,7 +25,7 @@
         android:layout_marginEnd="30dp"
         android:clickable="true"
         android:layout_gravity="bottom|end"
-        android:contentDescription="@string/next_button"
+        android:contentDescription="@string/next_button_content_description"
         android:focusable="true"
         android:visibility="visible"
         app:fabCustomSize="60dp"

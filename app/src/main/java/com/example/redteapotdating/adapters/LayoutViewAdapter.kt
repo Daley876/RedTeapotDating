@@ -97,10 +97,10 @@ class LayoutViewAdapter(currentUser: User, config: ProfileConfig) :
             if (currUser.about.isNullOrEmpty()) ITEM_EMPTY else ITEM_ABOUT
         }
         else if (profileConfig.profile[position].equals("photo", ignoreCase = true)) {
-            ITEM_PHOTO
+            if (currUser.photo.isNullOrEmpty()) ITEM_EMPTY else ITEM_PHOTO
         }
         else if (profileConfig.profile[position].equals("gender", ignoreCase = true)) {
-            ITEM_GENDER
+            if (currUser.photo.isNullOrEmpty()) ITEM_EMPTY else ITEM_GENDER
         }
         else ITEM_EMPTY
     }
@@ -182,7 +182,8 @@ class LayoutViewAdapter(currentUser: User, config: ProfileConfig) :
         fun bindProfilePic(url: String?) {
                 Glide.with(photoTv.context)
                     .load(url)
-                    .error(R.drawable.blank_user)
+                    .placeholder(R.drawable.image_missing)
+                    .error(R.drawable.error_image)
                     .into(photoTv)
         }
     }
@@ -191,12 +192,12 @@ class LayoutViewAdapter(currentUser: User, config: ProfileConfig) :
         RecyclerView.ViewHolder(binding.root)
 
     companion object {
-        const val ITEM_NAME = 1
-        const val ITEM_PHOTO = 2
-        const val ITEM_GENDER = 3
-        const val ITEM_ABOUT = 4
-        const val ITEM_SCHOOL = 5
-        const val ITEM_HOBBIES = 6
+        const val ITEM_NAME = 1001
+        const val ITEM_PHOTO = 2001
+        const val ITEM_GENDER = 3001
+        const val ITEM_ABOUT = 4001
+        const val ITEM_SCHOOL = 5001
+        const val ITEM_HOBBIES = 6001
         const val ITEM_EMPTY = 99
     }
 }
