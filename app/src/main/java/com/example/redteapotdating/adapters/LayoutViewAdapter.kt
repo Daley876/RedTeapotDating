@@ -146,11 +146,10 @@ class LayoutViewAdapter(currUser: User, config: ProfileConfig) :
         private val genderTv = binding.tvGenderInfo
 
         fun bind(currUser: User) {
-            val genderToSet: String
 
-            if (currUser.gender.equals("m", ignoreCase = true)
-                || currUser.gender.equals("male", ignoreCase = true)) genderToSet = "Male"
-            else genderToSet = "Female"
+            val genderToSet = if (currUser.gender.equals("m", ignoreCase = true)
+                || currUser.gender.equals("male", ignoreCase = true)) "Male"
+            else "Female"
 
             genderTv.text = genderToSet
         }
