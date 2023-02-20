@@ -33,6 +33,7 @@ class ProfileViewFragment : Fragment() {
         initViewModel()
         initObservers()
         initListeners()
+        initRecyclerView()
     }
 
     private fun initRecyclerView() {
@@ -45,7 +46,7 @@ class ProfileViewFragment : Fragment() {
 
     private fun initAdapters() {
         val initialUser = User("","", listOf(),0,"","","")
-        val initialConfig = ProfileConfig(listOf("name", "photo", "gender", "about", "school", "hobbies"))
+        val initialConfig = ProfileConfig(listOf())
         layoutViewAdapter = LayoutViewAdapter(initialUser, initialConfig)
     }
 
@@ -87,7 +88,6 @@ class ProfileViewFragment : Fragment() {
             }
         binding.searchBtn.setOnClickListener {
             dataRetrieval()
-            initRecyclerView()
             it.visibility = View.GONE
         }
     }
