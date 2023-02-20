@@ -4,7 +4,7 @@
 ##App Description/Functionality:
  - This app allows the user retrieve a list of profiles belonging to different users from an endpoint ("/users") and display those profiles in the UI.
  - The profiles are displayed individually and can be cycled through by pressing navigation button on the screen.
- - The app will display the user profile data (name, gender, photo, hobbies, school and about) in the order specified in the "/config" endpoint.
+ - The app will display the user profile data (name, gender, photo, hobbies, school and about) in the order specified in the response from the "/config" endpoint.
 
 
 
@@ -17,24 +17,26 @@
 
 ##How The App Works
 
-- This project uses MVVM architecture style including a repository to execute API calls using Retrofit. The Model classes are:
+- This project uses MVVM architecture style including a repository to execute API calls using Retrofit. The response is represented in models.
+
+- The Model classes are:
   > ProfileConfig: represents the order of how user information is displayed and is retrieved from "/config" endpoint.
   
   > User: represents the profile information of a single user.
   
   > UsersInfo: represents a list of User objects and is retrieved from "/users" endpoint.
 
-- Retrofit is used to make Calls to the API endpoints mentioned above through functions in a Service interface. The Retrofit instance uses the Singleton pattern to ensure only one instance of it exists in the app. API calls are triggered from the repositroy UsersRepository which is done using Coroutine so that the main UI thread will not be blocked.
+- Retrofit is used to make Calls to the API endpoints mentioned above through functions in a Service interface. The Retrofit instance uses the Singleton pattern to ensure only one instance of it exists in the app. API calls are triggered from a repositroy which is done using Coroutines so that the main UI thread is not blocked.
 
-- Once the response is transformed and ready to use, the data is set to LiveData variables which are observed within the repository which are observed from the ViewModel. The ViewModel stores the observed data from the repository in its own LiveData variables which are observed from the View.
+- Once the response JSON is transformed and ready to use, the data is set to LiveData variables within the repository which are observed from the ViewModel. The ViewModel stores the observed values from the repository in its own LiveData variables which are observed from our Fragment.
 
-- There is a single Activity in the app which calls a Fragment upon app launch. This fragment has a recyclerView layout which serves to take the users list in UsersInfo and display it in the order specified in ProfileConfig. An adapter is used to manage and determine which layouts are inflated the position of said layouts on the screen. 
-
-- When the fragment is first called, it initalizes the RecyclerView, it's Adapter and the ViewModel. When changes in data retreieved from the web service is reflected in the ViewModel, those changes are observed from the Fragment. The fragment will take the first user in the UsersInfo.users list (at index 0) and call a method in the Adapter which takes that user's data (which is referred to as the currentUser) and display it to the UI. Each time the user navigates to the next profile in the UsersInfo.users list, the index is incremeted by 1 and that user becomes the new "currentUser" which is then sent to the adapter to be displayed in the RecyclerView.
-
-- The user index and current user information is all processed and handled within the View Model. Once the current user is determined, this value is observed from the Fragment which is then communicated to the Adapter 
+- There is a single Activity and Fragment in the app. The Activity calls the Fragment upon app launch. This fragment has a RecyclerView layout in its related .xml file which serves to take the Users list in UsersInfo and display it in the order specified in ProfileConfig. An Adapter is used to manage and determine which layouts are inflated to which position on the screen. 
 
 - The Adapter is created with a companion object of constants of Int value which represents each layout to be inflated. The layouts here refer to the different user profile sections (name, gender, school etc). As some user information can be missing, there is an empty layout option to be used in those cases. The only exception is for cases where the profile photo is missing. In this case, we will upload a default photo to the UI based on the gender of the currentUser.  
+
+- When the fragment is first called, it does certain initalizations which include the RecyclerView, it's Adapter and the ViewModel. When changes in data retreieved from the web service is reflected in the ViewModel, those changes are observed from the Fragment. The Fragment will take the first user in the UsersInfo.users list (at index 0) and call a method in the Adapter which takes that user's data (which is referred to as the "currentUser") and display it to the UI. 
+
+- Each time the user navigates to the next profile in the UsersInfo.users list, the index is incremeted by 1 and that user becomes the new "currentUser" which is then sent to the adapter to be displayed in the RecyclerView. The index and current user information is all processed and handled within the View Model. Once the current user is determined, this value is observed from the Fragment which is then communicated to the Adapter 
 
 
 
@@ -52,3 +54,5 @@
   - Coroutines
   - Animation
   - recyclerview: 1.2.1
+  
+  
