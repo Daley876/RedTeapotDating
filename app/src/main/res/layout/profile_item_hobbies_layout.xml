@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-<LinearLayout
-                android:id="@+id/hobbies_section"
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:visibility="visible"
-                android:layout_marginTop="10dp"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/tv_hobbies"
-                    android:layout_width="match_parent"
-                    android:textSize="30sp"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-                    android:fontFamily="sans-serif"
-                    android:text="@string/hobbies"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:id="@+id/tv_hobbies_info"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:textSize="20sp"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
-                    android:fontFamily="sans-serif"
-                    android:text="@string/sample_name"
-                    android:textColor="@color/black"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
+    <LinearLayout
+        android:id="@+id/hobbies_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/tv_hobbies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:text="@string/hobbies"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_hobbies_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:text="@string/sample_name"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 
 </layout>

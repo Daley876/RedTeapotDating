@@ -49,9 +49,9 @@ class ProfileViewFragment : Fragment() {
 
     private fun navProfileTransitions(){
         val fadeOutAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_out)
-        fadeOutAnimation.duration = 1300
+        fadeOutAnimation.duration = 400
         val fadeInAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in)
-        fadeInAnimation.duration = 1300
+        fadeInAnimation.duration = 400
 
         binding.recyclerView.startAnimation(fadeOutAnimation)
         viewmodel.updateIndexToNextUser()
@@ -78,8 +78,6 @@ class ProfileViewFragment : Fragment() {
             else binding.nextFAB.visibility = View.INVISIBLE
         }
     }
-
-
 
     private fun initListeners() {
             binding.nextFAB.setOnClickListener{
