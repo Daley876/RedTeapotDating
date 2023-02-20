@@ -13,6 +13,7 @@ class LayoutViewAdapter(currentUser: User, config: ProfileConfig) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var profileConfig = config
     private var currUser = currentUser
+    private var isUserProfileDataFetched = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val context = parent.context
@@ -80,34 +81,53 @@ class LayoutViewAdapter(currentUser: User, config: ProfileConfig) :
     }
 
     override fun getItemCount(): Int {
-        return profileConfig.profile.size
+        return if (isUserProfileDataFetched) profileConfig.profile.size else 1
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (profileConfig.profile[position].equals("name", ignoreCase = true)) {
+        return if (profileConfig.profile[position].equals(
+                "name",
+                ignoreCase = true
+            ) && isUserProfileDataFetched
+        ) {
             ITEM_NAME
-        }
-        else if (profileConfig.profile[position].equals("school", ignoreCase = true)) {
+        } else if (profileConfig.profile[position].equals(
+                "school",
+                ignoreCase = true
+            ) && isUserProfileDataFetched
+        ) {
             if (currUser.school.isNullOrEmpty()) ITEM_EMPTY else ITEM_SCHOOL
-        }
-        else if (profileConfig.profile[position].equals("hobbies", ignoreCase = true)) {
+        } else if (profileConfig.profile[position].equals(
+                "hobbies",
+                ignoreCase = true
+            ) && isUserProfileDataFetched
+        ) {
             if (currUser.hobbies.isNullOrEmpty()) ITEM_EMPTY else ITEM_HOBBIES
-        }
-        else if (profileConfig.profile[position].equals("about", ignoreCase = true)) {
+        } else if (profileConfig.profile[position].equals(
+                "about",
+                ignoreCase = true
+            ) && isUserProfileDataFetched
+        ) {
             if (currUser.about.isNullOrEmpty()) ITEM_EMPTY else ITEM_ABOUT
-        }
-        else if (profileConfig.profile[position].equals("photo", ignoreCase = true)) {
+        } else if (profileConfig.profile[position].equals(
+                "photo",
+                ignoreCase = true
+            ) && isUserProfileDataFetched
+        ) {
             ITEM_PHOTO
-        }
-        else if (profileConfig.profile[position].equals("gender", ignoreCase = true)) {
+        } else if (profileConfig.profile[position].equals(
+                "gender",
+                ignoreCase = true
+            ) && isUserProfileDataFetched
+        ) {
             if (currUser.photo.isNullOrEmpty()) ITEM_EMPTY else ITEM_GENDER
-        }
-        else ITEM_EMPTY
+        } else ITEM_EMPTY
     }
 
     fun updateUserData(currentUser: User?) {
         if (currentUser != null) {
             currUser = currentUser
+            isUserProfileDataFetched = true
             notifyDataSetChanged()
         }
     }
@@ -180,10 +200,10 @@ class LayoutViewAdapter(currentUser: User, config: ProfileConfig) :
         private val photoTv = binding.profilePic
 
         fun bindProfilePic(url: String?) {
-                Glide.with(photoTv.context)
-                    .load(url)
-                    .error(R.drawable.blank_user)
-                    .into(photoTv)
+            Glide.with(photoTv.context)
+                .load(url)
+                .error(R.drawable.blank_user)
+                .into(photoTv)
         }
     }
 
