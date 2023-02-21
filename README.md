@@ -26,7 +26,7 @@
   
   > UsersInfo: represents a list of User objects and is retrieved from "/users" endpoint.
 
-- Retrofit is used to make Calls to the API endpoints mentioned above through functions in a Service interface. The Retrofit instance uses the Singleton pattern to ensure only one instance of it exists in the app. API calls are triggered from a repositroy which is done using Coroutines so that the main UI thread is not blocked.
+- Retrofit is used to make Calls to the API endpoints mentioned above through functions in a Service interface. The Retrofit instance uses the Singleton pattern to ensure only one instance of it exists in the app.
 
 - Once the response JSON is transformed and ready to use, the data is set to LiveData variables within the repository which are observed from the ViewModel. The ViewModel stores the observed values from the repository in its own LiveData variables which are observed from our Fragment.
 
@@ -51,7 +51,6 @@
   - Observer
   - Singleton
   - Data Binding (1-way)
-  - Coroutines
   - Animation
   - recyclerview: 1.2.1
   
