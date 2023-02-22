@@ -2,7 +2,6 @@ package com.example.redteapotdating.repository
 
 import android.util.Log
 import com.example.redteapotdating.model.ProfileConfig
-import com.example.redteapotdating.model.User
 import com.example.redteapotdating.model.UsersInfo
 import com.example.redteapotdating.network.NetworkConnection
 import com.example.redteapotdating.network.ProfileConfigCallbackInterface
@@ -16,20 +15,12 @@ class UsersRepository {
 
     fun getUserDataApi(callback : UserInfoCallbackInterface) {
         val call = networkConn.serviceApi.getAllUsers()
-        val listOfCurrUsers = mutableListOf<User>()
 
         call.enqueue(object : Callback<UsersInfo>{
             override fun onResponse(call: Call<UsersInfo>, response: Response<UsersInfo>) {
                if (response.body() != null && response.isSuccessful){
                    val data = response.body()
-                 for (c in data?.users!!){
-                     val user = User(c.about,
-                                c.gender,c.hobbies,
-                                c.id,c.name,c.photo,c.school)
-                     listOfCurrUsers.add(user)
-                 }
-                   val dataObject = UsersInfo(listOfCurrUsers)
-                   callback.onSuccess(dataObject)
+                   callback.onSuccess(data!!)
                }
             }
             override fun onFailure(call: Call<UsersInfo>, t: Throwable) {
@@ -47,8 +38,7 @@ class UsersRepository {
            override fun onResponse(call: Call<ProfileConfig>, response: Response<ProfileConfig>) {
                if (response.body() != null && response.isSuccessful) {
                    val data = response.body()
-                   val profileConfig = ProfileConfig(data?.profile!!)
-                   callback.onSuccess(profileConfig)
+                   callback.onSuccess(data!!)
                }
            }
 
