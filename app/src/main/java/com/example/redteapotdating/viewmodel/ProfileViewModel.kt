@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import com.example.redteapotdating.model.ProfileConfig
 import com.example.redteapotdating.model.User
 import com.example.redteapotdating.model.UsersInfo
-import com.example.redteapotdating.network.ProfileConfigCallbackInterface
-import com.example.redteapotdating.network.UserInfoCallbackInterface
+import com.example.redteapotdating.network.interfaces.ProfileConfigCallbackInterface
+import com.example.redteapotdating.network.interfaces.UserInfoCallbackInterface
 import com.example.redteapotdating.repository.UsersRepository
 
 class ProfileViewModel : ViewModel() {
@@ -60,7 +60,7 @@ class ProfileViewModel : ViewModel() {
     }
 
      fun retrieveUsersApiCall(){
-         repo.getUserDataApi(object : UserInfoCallbackInterface{
+         repo.getUserDataApi(object : UserInfoCallbackInterface {
              override fun onSuccess(response: UsersInfo) {
                  listOfUserMutableLive.value = response
              }
@@ -70,7 +70,7 @@ class ProfileViewModel : ViewModel() {
              }
          })
 
-         repo.getProfileConfigApi(object : ProfileConfigCallbackInterface{
+         repo.getProfileConfigApi(object : ProfileConfigCallbackInterface {
              override fun onSuccess(response: ProfileConfig) {
                  configMutableLiveData.value = response
              }

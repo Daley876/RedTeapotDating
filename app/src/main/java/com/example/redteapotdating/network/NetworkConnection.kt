@@ -1,9 +1,11 @@
 package com.example.redteapotdating.network
 
+import com.example.redteapotdating.network.interfaces.NetworkConnServiceInterface
+import com.example.redteapotdating.network.interfaces.ProfileOrderServicesApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object NetworkConnection {
+object NetworkConnection : NetworkConnServiceInterface {
     private const val BASE_URL = "http://hinge-ue1-dev-cli-android-homework.s3-website-us-east-1.amazonaws.com"
 
     private val retrofit = Retrofit.Builder()
@@ -11,6 +13,7 @@ object NetworkConnection {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-     val serviceApi: ProfileOrderServicesApi = retrofit.create(ProfileOrderServicesApi::class.java)
+    override val serviceApi: ProfileOrderServicesApi
+        get() =  retrofit.create(ProfileOrderServicesApi::class.java)
 
 }

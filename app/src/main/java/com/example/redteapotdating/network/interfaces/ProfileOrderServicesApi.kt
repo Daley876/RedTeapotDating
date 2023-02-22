@@ -1,4 +1,4 @@
-package com.example.redteapotdating.network
+package com.example.redteapotdating.network.interfaces
 
 import com.example.redteapotdating.model.ProfileConfig
 import com.example.redteapotdating.model.UsersInfo
